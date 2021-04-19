@@ -5,8 +5,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TodolistComponent } from './todolist/todolist.component';
-import {CheckboxModule} from 'primeng/checkbox';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import {MatCardModule} from '@angular/material/card';
+import {MatInputModule} from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import {CheckboxModule} from 'primeng/checkbox';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    CheckboxModule
+    BrowserAnimationsModule,
+    MatCardModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]
