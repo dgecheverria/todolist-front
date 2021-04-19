@@ -1,0 +1,13 @@
+.card-list {
+    list-style: none;
+}
+
+.title {
+    text-align: center;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

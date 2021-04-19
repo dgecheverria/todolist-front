@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
+
 @Component({
   selector: 'app-todolist',
   templateUrl: './todolist.component.html',
@@ -9,6 +10,7 @@ import { Component, OnInit } from '@angular/core';
 export class TodolistComponent implements OnInit {
 
   listTask:any = [];
+  countTask:number = 0;
   checked: boolean = false;
 
   constructor(private http: HttpClient) { }
@@ -20,8 +22,9 @@ export class TodolistComponent implements OnInit {
   getListTask() {
     let resp= this.http.get("http://localhost:8080/todos/1/items");
     resp.subscribe((data)=>{
-      //console.log(data);
+     
       this.listTask = data;
+  
     });
   }
 
