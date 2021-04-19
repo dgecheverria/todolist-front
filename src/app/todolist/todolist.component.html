@@ -10,20 +10,32 @@
     <mat-card class="my-list-card">
         <mat-card-header>
             <div mat-card-avatar class="example-header-image"></div>
-            <mat-card-title>Mi Lista de Tareas</mat-card-title>
+            <mat-card-title class="title">Mi Lista de Tareas</mat-card-title>
         </mat-card-header>
         <mat-card-content>
 
-            <mat-form-field class="question-form">
-                <mat-label>Tienes algo pendiente para hoy?</mat-label>
-                <input #titleTask matInput placeholder="Ingrese una tarea" (keyup.enter)="addNewTask(titleTask.value)" [value]="taskValue">
-            </mat-form-field>
+            <mat-tab-group mat-align-tabs="center">
+                <mat-tab label="Pendientes">
+                    <mat-form-field class="question-form">
+                        <mat-label>Tienes algo pendiente para hoy?</mat-label>
+                        <input #titleTask matInput placeholder="Ingrese una tarea" (keyup.enter)="addNewTask(titleTask.value)" [value]="taskValue">
+                    </mat-form-field>
+                    <ul class="card-list">
+                        <li *ngFor="let list of listTask" [ngClass]="{'line-through-text':list.checked}">
+                            <input type="checkbox" id="list.id" value="first_checkbox" [checked]="list.checked" (click)="this.checkTask(list.id)" [disabled]="list.checked">{{list.title}}
+                        </li>
+                    </ul>
+                </mat-tab>
+                <mat-tab label="Completadas">
+                    <ul class="card-list">
+                        <li *ngFor="let list of listCompleteTask" [ngClass]="{'line-through-text':list.checked}">
+                            <input type="checkbox" id="list.id" value="first_checkbox" [checked]="list.checked" (click)="this.checkTask(list.id)" [disabled]="list.checked">{{list.title}}
+                        </li>
+                    </ul>
+                </mat-tab>
+            </mat-tab-group>
 
-            <ul class="card-list">
-                <li *ngFor="let list of listTask" [ngClass]="{'line-through-text':list.checked}">
-                    <input type="checkbox" id="list.id" value="first_checkbox" [checked]="list.checked" (click)="this.checkTask(list.id)">{{list.title}}
-                </li>
-            </ul>
+
         </mat-card-content>
         <!-- <mat-card-actions>
             <button mat-button>LIKE</button>

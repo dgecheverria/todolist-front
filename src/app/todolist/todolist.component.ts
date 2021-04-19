@@ -16,11 +16,13 @@ export class TodolistComponent implements OnInit {
   checked: boolean = false;
   postId: any;
   taskValue: string = "";
+  listCompleteTask:any = [];
 
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
-    this.getListTask() 
+    this.getListTask();
+    this.getListTaskComplete(); 
   }
 
   getListTask() {
@@ -28,16 +30,29 @@ export class TodolistComponent implements OnInit {
     resp.subscribe((data)=>{
      
       this.listTask = data;
+      
   
     });
   }
+
+  getListTaskComplete() {
+    let resp= this.http.get("http://localhost:8080/todos/1/complete");
+    resp.subscribe((data)=>{
+     
+      this.listCompleteTask = data;
+      
+  
+    });
+  }
+
 
   addNewTask(value:any) {
     let title_task = value;
     // Simple POST request with a JSON body and response type <any>
      this.http.post<any>('http://localhost:8080/todos/1/item', {"title":title_task}).subscribe(data => {
       this.postId = data.id;
-      this.titleTask.nativeElement.value = ' '
+      this.titleTask.nativeElement.value = ' ';
+      this.titleTask.nativeElement.focus();
       this.getListTask();
     }) 
   }
@@ -48,6 +63,7 @@ export class TodolistComponent implements OnInit {
     this.http.put<any>(url, {}).subscribe(data => {
       this.postId = data.id;
       this.getListTask();
+      this.getListTaskComplete(); 
     }) 
   }
 
