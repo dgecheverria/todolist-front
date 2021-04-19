@@ -34,11 +34,19 @@ export class TodolistComponent implements OnInit {
 
   addNewTask(value:any) {
     let title_task = value;
-    console.log(title_task);
     // Simple POST request with a JSON body and response type <any>
      this.http.post<any>('http://localhost:8080/todos/1/item', {"title":title_task}).subscribe(data => {
       this.postId = data.id;
       this.titleTask.nativeElement.value = ' '
+      this.getListTask();
+    }) 
+  }
+
+  checkTask(item_id:any) {
+    let item = item_id;
+    let url = 'http://localhost:8080/todos/1/item/'+item;
+    this.http.put<any>(url, {}).subscribe(data => {
+      this.postId = data.id;
       this.getListTask();
     }) 
   }

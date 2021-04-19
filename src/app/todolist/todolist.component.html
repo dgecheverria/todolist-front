@@ -20,8 +20,8 @@
             </mat-form-field>
 
             <ul class="card-list">
-                <li *ngFor="let list of listTask">
-                    <input type="checkbox" id="list.id" value="first_checkbox" [checked]="list.checked">{{list.title}}
+                <li *ngFor="let list of listTask" [ngClass]="{'line-through-text':list.checked}">
+                    <input type="checkbox" id="list.id" value="first_checkbox" [checked]="list.checked" (click)="this.checkTask(list.id)">{{list.title}}
                 </li>
             </ul>
         </mat-card-content>
